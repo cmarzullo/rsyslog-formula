@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: salt_solo
+  is_file_root: true
+  salt_copy_filter:
+    - .kitchen
+    - .git
+  state_top:
+    base:
+      "*":
+        - test.mockup.ssl
+        - rsyslog
+        - test.mockup.auditd
+  pillars:
+    top.sls:
+      base:
+        "*":
+          - rsyslog
+
+platforms:
+  - name: bento/debian-8
+  - name: bento/debian-9
+
+suites:
+  - name: default
+    provisioner:
+      pillars:
+        rsyslog.sls:
+          rsyslog:
+            enabled: true
+
+  - name: udpserver
+    provisioner:
+      pillars-from-files:
+        rsyslog.sls: pillar-udpserver.sls
+  
+  - name: tcpserver
+    provisioner:
+      pillars-from-files:
+        rsyslog.sls: pillar-tcpserver.sls
+
+  - name: tlsserver
+    provisioner:
+      pillars-from-files:
+        rsyslog.sls: pillar-tlsserver.sls

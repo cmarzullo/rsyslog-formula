@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+# Defaults for rsyslog
+
+rsyslog:
+  enabled: False
+  required_pkgs:
+    - rsyslog
+  service:
+    name: rsyslog
+    state: running
+    enable: True
+  tls:
+    enable: False
+  # /var/log/syslog
+  syslog: '*.*;auth,authpriv.none'
+  # The var log messages line has line breaks and tabs. And because of this we 
+  # use the | notation here to match what the default file looks like. Should you
+  # override this, and just use one line.
+  ## DO NOT LET YOUR EDITOR FIX THESE TABS ##
+  # /var/log/messages
+  messages: |
+    *.=info;*.=notice;*.=warn;\
+    	auth,authpriv.none;\
+    	cron,daemon.none;\
+    	mail,news.none

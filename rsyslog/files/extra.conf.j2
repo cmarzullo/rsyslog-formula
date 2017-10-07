@@ -1,0 +1,63 @@
+##
+## {{ config_name }}
+##
+{% if config.templates is defined %}
+# Templates
+{%- for template in config.templates %}
+template(
+{%- for k,v in template.iteritems() %}
+        {{ k }}="{{ v }}"
+{%- endfor %}
+        )
+{%- endfor %}
+{%- endif %}
+{% if config.rulesets is defined %}
+# Rulesets
+{%- for ruleset in config.rulesets %}
+ruleset(
+        name="{{ ruleset.name }}"
+        ) {
+        {% for action in ruleset.actions -%}
+        {% if action.filter is defined -%}
+        {{ action.filter }} action({% for k,v in action.parameters.iteritems() %}{{ k }}="{{ v }}" {% endfor %})
+        {% else -%}
+        action({% for k,v in action.parameters.iteritems() %}{{ k }}="{{ v }}" {% endfor %})
+        {%- endif %}
+        {%- endfor %}
+        }
+{%- endfor %}
+{%- endif %}
+{% if config.modules is defined %}
+# Modules
+{%- for module in config.modules %}
+module(
+{%- for k,v in module.iteritems() %}
+        {%- if v is list%}
+        {{ k }}={{ v | string | replace("'","\"") }}
+        {%- else %}
+        {{ k }}="{{ v | string }}"
+        {%- endif %}
+{%- endfor %}
+      )
+{%- endfor %}
+{%- endif %}
+{% if config.inputs is defined %}
+# Inputs
+{%- for input in config.inputs %}
+input(
+{%- for k,v in input.iteritems() %}
+        {{ k }}="{{ v }}"
+{%- endfor %}
+      )
+{%- endfor %}
+{%- endif %}
+{% if config.actions is defined %}
+# Actions
+{%- for action in config.actions %}
+action(
+{%- for k,v in action.iteritems() %}
+       {{ k }}="{{ v }}"
+{%- endfor %}
+      )
+{% endfor %}
+{% endif %}
