@@ -8,7 +8,7 @@ test_mockup_ssl_create_ca:
     - ca_name: example_test_ca
     - days: 5
     - CN: 'example Test CA'
-    - C: MyCountry
+    - C: US
     - ST: MyState
     - L: MyCity
     - O: example Testing
