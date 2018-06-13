@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
+{% if grains.os_family == "RedHat" %}
+test_mockup_ssl_support:
+  pkg.installed:
+    - pkgs:
+      - pyOpenSSL
+{% endif %}
+
 # create ssl ca and keypair
 test_mockup_ssl_create_ca:
   module.run:

@@ -33,7 +33,7 @@ ruleset(
 module(
 {%- for k,v in module.iteritems() %}
         {%- if v is list%}
-        {{ k }}={{ v | string | replace("'","\"") }}
+        {{ k }}={{ v | json_decode_list | replace("'","\"") }}
         {%- else %}
         {{ k }}="{{ v | string }}"
         {%- endif %}

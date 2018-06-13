@@ -6,7 +6,7 @@
 rsyslog_config_global:
   file.managed:
     - name: '/etc/rsyslog.conf'
-    - source: 'salt://rsyslog/files/rsyslog.conf.j2'
+    - source: 'salt://rsyslog/files/rsyslog.conf.{{ grains.os_family }}.j2'
     - user: 'root'
     - group: 'root'
     - mode: 0644
@@ -23,7 +23,7 @@ rsyslog_config_{{ name }}:
     - mode: 0644
     - template: jinja
     - config_name: {{ name }}
-    - config: {{ config }}
+    - config: {{ config | yaml}}
     - watch_in:
       - service: rsyslog_service
 

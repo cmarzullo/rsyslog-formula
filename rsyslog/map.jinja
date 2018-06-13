@@ -13,7 +13,9 @@ that differ from whats in defaults.yml
         'Debian': {},
         'Suse': {},
         'Arch': {},
-        'RedHat': {},
+        'RedHat': {
+          'messages': '*.info;mail.none;authpriv.none;cron.none'
+          },
   }
   , grain="os_family"
   , merge=salt['pillar.get']('rsyslog:lookup'))

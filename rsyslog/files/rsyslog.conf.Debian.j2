@@ -109,6 +109,7 @@ news.notice			-/var/log/news/news.notice
 #
 *.emerg				:omusrmsg:*
 
+{% if grains.osmajorrelease == 8 %}
 #
 # I like to have messages displayed on the console, but only on a virtual
 # console I usually leave idle.
@@ -130,3 +131,4 @@ daemon.*;mail.*;\
 	news.err;\
 	*.=debug;*.=info;\
 	*.=notice;*.=warn	|/dev/xconsole
+{% endif %}

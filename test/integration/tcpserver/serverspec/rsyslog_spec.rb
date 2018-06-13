@@ -31,7 +31,8 @@ describe file('/etc/rsyslog.d/tcp-client-server.conf') do
   its(:content) { should match /template="RSYSLOG_TraditionalFileFormat"/ }
 end
 
-hostname = Socket.gethostname
+# Get the short hostname
+hostname = Socket.gethostname[/^[^.]+/]
 describe file("/tmp/#{hostname}.log") do
   it { should exist }
 end
