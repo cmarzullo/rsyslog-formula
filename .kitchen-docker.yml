@@ -18,9 +18,12 @@ provisioner:
           - rsyslog
 
 platforms:
-  - name: debian
+  - name: debian-9
     driver:
-      image: debian:8
+      image: debian:9
+  - name: centos-7
+    driver:
+      image: centos:7
 
 suites:
   - name: default
