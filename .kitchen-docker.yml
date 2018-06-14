@@ -3,7 +3,6 @@
 ---
 driver:
   name: docker
-  image: debian:8
 
 provisioner:
   name: salt_solo
@@ -20,6 +19,8 @@ provisioner:
 
 platforms:
   - name: debian
+    driver:
+      image: debian:8
 
 suites:
   - name: default
@@ -29,7 +30,17 @@ suites:
           rsyslog:
             enabled: true
 
-  - name: custom
+  - name: udpserver
     provisioner:
       pillars-from-files:
-        rsyslog.sls: pillar-custom.sls
+        rsyslog.sls: pillar-udpserver.sls
+
+  - name: tcpserver
+    provisioner:
+      pillars-from-files:
+        rsyslog.sls: pillar-tcpserver.sls
+
+  - name: tlsserver
+    provisioner:
+      pillars-from-files:
+        rsyslog.sls: pillar-tlsserver.sls
