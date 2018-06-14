@@ -10,7 +10,9 @@ services:
 env:
   matrix:
   - INSTANCE=default
-  - INSTANCE=custom
+  - INSTANCE=udpserver
+  - INSTANCE=tcpserver
+  - INSTANCE=tlsserver
 
 script:
   - bundle exec docker version
