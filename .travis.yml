@@ -8,9 +8,9 @@ services:
   - docker
 
 env:
+- PLATFORM=centos-7
+- PLATFORM=debian-9
   matrix:
-  - PLATFORM=centos-7
-  - PLATFORM=debian-9
   - INSTANCE=default
   - INSTANCE=udpserver
   - INSTANCE=tcpserver
