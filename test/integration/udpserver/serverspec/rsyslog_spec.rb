@@ -29,7 +29,8 @@ describe file('/etc/rsyslog.d/udp-client-server.conf') do
   its(:content) { should match /Protocol="udp"/ }
 end
 
-hostname = Socket.gethostname
+# Get the short hostname
+hostname = Socket.gethostname[/^[^.]+/]
 describe file("/tmp/#{hostname}.log") do
   it { should exist }
 end
