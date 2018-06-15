@@ -8,18 +8,16 @@ services:
   - docker
 
 env:
-- PLATFORM=centos-7
-- PLATFORM=debian-9
   matrix:
-  - INSTANCE=default
-  - INSTANCE=udpserver
-  - INSTANCE=tcpserver
-  - INSTANCE=tlsserver
+    - INSTANCE=default
+    - INSTANCE=udpserver
+    - INSTANCE=tcpserver
+    - INSTANCE=tlsserver
 
 script:
   - bundle exec docker version
   - bundle exec kitchen --version
-  - KITCHEN_YAML=.kitchen-docker.yml kitchen test ${PLATFORM}-${INSTANCE} -d always
+  - KITCHEN_YAML=.kitchen-docker.yml kitchen test ${INSTANCE} -d always
 
 after_script:
   - docker images
